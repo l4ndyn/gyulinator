@@ -5,7 +5,7 @@ bot.login(auth.token);
 
 bot.once('ready', () => {
 	// List servers the bot is connected to
-	console.log('Servers:');
+	console.log('Channels:');
 	bot.guilds.cache.forEach((guild) => {
 		console.log(' - ' + guild.name);
 
@@ -15,11 +15,16 @@ bot.once('ready', () => {
 		});
 	});
 
-	const generalChannel = bot.channels.cache.get('764098934867230766');
+	console.log('Emojis:');
+	bot.emojis.cache.forEach((emoji) => {
+		console.log(` -- ${emoji.name} (${emoji.toString()})`);
+	});
 });
 
 let punishment = false;
-const peacock = bot.emojis.cache.find(emoji => emoji.name === 'rofi');
+const peacock = '<:rofi:768470560606519326>';
+
+const days = require('./daydiff.js');
 
 bot.on('message', message => {
 	const PREFIX = '!';
@@ -41,8 +46,8 @@ bot.on('message', message => {
 		message.channel.send('Pong');
 	}
 	else if (command === 'week') {
-		const diffInMs = new Date() - new Date('2020-10-01');
-		const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+		const d = new Date();
+		const diffInDays = days.dayDiff(2020, 9, 28, d.getFullYear(), d.getMonth() + 1, d.getDate());
 
 		let msg = 'Paratlan';
 		if (Math.floor(diffInDays / 7) % 2 === 1) {
