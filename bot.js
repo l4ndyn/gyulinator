@@ -26,7 +26,15 @@ bot.on('message', message => {
 	const args = message.content.slice(PREFIX.length).trim().split(' ');
 	const command = args.shift().toLowerCase();
 
-	if (command === 'ping') {
+	if (command === 'help') {
+		if (Math.random() * 10 > 3) {
+			message.channel.send('Nem!');
+		}
+		else {
+			message.channel.send('1. Ping \n2. week \n3. actest \n4. cave \n5. gyula \n6. punishment');
+		}
+    }
+	else if (command === 'ping') {
 		message.channel.send('Pong');
 	}
 	else if (command === 'week') {
@@ -112,5 +120,8 @@ bot.on('message', message => {
 	}
 	else if (command === 'punishment') {
 		message.channel.send('-Rossz Gyulinator!!1 :rofi:\n-Neeee, hagyd abbaaaa! :sob:');
+	}
+	else if (command === 'gyula') {
+		message.channel.send('Iratkozz fel Gyulara!\n\n https://www.youtube.com/channel/UCzP3tDd5-GxPxRct2lbsQlw');
 	}
 });
