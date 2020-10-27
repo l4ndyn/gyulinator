@@ -19,6 +19,7 @@ bot.once('ready', () => {
 });
 
 let punishment = false;
+const peacock = bot.emojis.cache.find(emoji => emoji.name === 'rofi');
 
 bot.on('message', message => {
 	const PREFIX = '!';
@@ -121,7 +122,7 @@ bot.on('message', message => {
 		message.channel.send(`\`\`\`${s}\`\`\``);
 	}
 	else if (command === 'punishment') {
-		message.channel.send('-Rossz Gyulinator!!1 :rofi:\n-Neeee, hagyd abbaaaa! :sob:');
+		message.channel.send(`-Rossz Gyulinator!!1 ${peacock}\n-Neeee, hagyd abbaaaa! :sob:`);
 		punishment = true;
 	}
 	else if (command === 'gyula') {
