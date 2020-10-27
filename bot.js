@@ -21,6 +21,7 @@ bot.once('ready', () => {
 bot.on('message', message => {
 	const PREFIX = '!';
 
+	//xd
 	if (!message.content.startsWith(PREFIX) || message.author.bot) return;
 
 	const args = message.content.slice(PREFIX.length).trim().split(' ');
@@ -33,7 +34,7 @@ bot.on('message', message => {
 		else {
 			message.channel.send('1. Ping \n2. week \n3. actest \n4. cave \n5. gyula \n6. punishment');
 		}
-    }
+	}
 	else if (command === 'ping') {
 		message.channel.send('Pong');
 	}
