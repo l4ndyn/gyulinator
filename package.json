@@ -1,0 +1,11 @@
+{
+	"name": "Gyulinator",
+	"version": "1.0.0",
+	"description": "<3",
+	"main": "bot.js",
+	"author": "L4ndyN",
+	"dependencies": {
+		"discord.js": "^12.4.0",
+		"eslint": "^7.11.0"
+	}
+}
