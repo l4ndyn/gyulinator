@@ -1,10 +1,9 @@
 const Discord = require('discord.js');
-const bot = new Discord.Client();
-
-const bot_secret_token = 'tokan lolxd';
-
-bot.login(bot_secret_token);
-
+const auth = require('./auth.json');
+const bot = new Discord.Client({
+	token: auth.token,
+	autorun: true,
+});
 
 bot.once('ready', () => {
 	// List servers the bot is connected to
