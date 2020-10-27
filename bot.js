@@ -18,6 +18,8 @@ bot.once('ready', () => {
 	const generalChannel = bot.channels.cache.get('764098934867230766');
 });
 
+let punishment = false;
+
 bot.on('message', message => {
 	const PREFIX = '!';
 
@@ -28,7 +30,7 @@ bot.on('message', message => {
 	const command = args.shift().toLowerCase();
 
 	if (command === 'help') {
-		if (Math.random() * 10 > 3) {
+		if (!punishment && Math.random() * 10 > 3) {
 			message.channel.send('Nem!');
 		}
 		else {
@@ -121,8 +123,11 @@ bot.on('message', message => {
 	}
 	else if (command === 'punishment') {
 		message.channel.send('-Rossz Gyulinator!!1 :rofi:\n-Neeee, hagyd abbaaaa! :sob:');
+		punishment = true;
 	}
 	else if (command === 'gyula') {
 		message.channel.send('Iratkozz fel Gyulara!\n\n https://www.youtube.com/channel/UCzP3tDd5-GxPxRct2lbsQlw');
 	}
+	if(command !== 'punishment')
+		punishment = false;
 });
