@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
-const bot_secret_token = 'NzY4NDc5NTA0Mzk3NzYyNTYx.X5BETw.W80qiTV4AQ2qkiVXKi58XosAs_Y';
+const bot_secret_token = 'tokan';
 
 bot.login(bot_secret_token);
 
