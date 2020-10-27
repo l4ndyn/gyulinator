@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
-const bot_secret_token = 'tokan';
+const bot_secret_token = 'tokan lolxd';
 
 bot.login(bot_secret_token);
 
