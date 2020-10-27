@@ -23,7 +23,6 @@ let punishment = false;
 bot.on('message', message => {
 	const PREFIX = '!';
 
-	//xd
 	if (!message.content.startsWith(PREFIX) || message.author.bot) return;
 
 	const args = message.content.slice(PREFIX.length).trim().split(' ');
@@ -128,6 +127,7 @@ bot.on('message', message => {
 	else if (command === 'gyula') {
 		message.channel.send('Iratkozz fel Gyulara!\n\n https://www.youtube.com/channel/UCzP3tDd5-GxPxRct2lbsQlw');
 	}
-	if(command !== 'punishment')
+	if (command !== 'punishment') {
 		punishment = false;
+	}
 });
