@@ -127,7 +127,8 @@ bot.on('message', message => {
 		message.channel.send(`\`\`\`${s}\`\`\``);
 	}
 	else if (command === 'punishment') {
-		message.channel.send(`-Rossz Gyulinator!!1 ${peacock}\n-Neeee, hagyd abbaaaa! :sob:`);
+		const scoldings = ['Rossz Gyulinator!!1', 'Nem vagy te jo semmire!', 'Az anyad csak 2 magos volt!!4!', 'Mindent rosszul csinalsz! Szegyen!!!!!', 'Hulye robot! Meg az I am not a robot is okosabb nalad!1!'];
+		message.channel.send(`-${scoldings[Math.floor(Math.random() * scoldings.length)]} ${peacock}\n-Neeee, hagyd abbaaaa! Mostantol jo leszek! :sob:`);
 		punishment = true;
 	}
 	else if (command === 'gyula') {
