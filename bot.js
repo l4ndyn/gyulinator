@@ -39,7 +39,7 @@ bot.on('message', message => {
 			message.channel.send('Nem!');
 		}
 		else {
-			message.channel.send('- Ping \n- week \n- actest \n- cave \n- gyula \n- punishment \n- class');
+			message.channel.send('- Ping \n- week \n- actest \n- cave \n- gyula \n- punishment \n- class \n- christmas \n- covid69');
 		}
 	}
 	else if (command === 'ping') {
@@ -140,7 +140,7 @@ bot.on('message', message => {
 		const currentDay = now.getDate();
 		let nextChristmasYear = now.getFullYear();
 
-		if(currentMonth == 12 && currentDay > 25) {
+		if (currentMonth == 12 && currentDay > 25) {
 			nextChristmasYear = nextChristmasYear + 1;
 		}
 
@@ -152,7 +152,7 @@ bot.on('message', message => {
 		let minutes = 0;
 		let seconds = 0;
 
-		if(currentMonth != 12 || (currentMonth == 12 && currentDay != 25)) {
+		if (currentMonth != 12 || (currentMonth == 12 && currentDay != 25)) {
 			day = Math.floor(diffSeconds / (3600 * 24));
 			diffSeconds -= day * 3600 * 24;
 			hours = Math.floor(diffSeconds / 3600);
@@ -357,6 +357,9 @@ bot.on('message', message => {
 				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a17e29916f74c4c77a8464800ac356662%40thread.tacv2/General?groupId=d17c1369-02dc-4cf4-a764-2742586fb81a&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
 			}
 		}
+	}
+	else if (command === 'covid69') {
+		message.channel.send('AAAA-chooo!');
 	}
 	if (command !== 'punishment') {
 		punishment = false;
