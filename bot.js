@@ -134,6 +134,36 @@ bot.on('message', message => {
 	else if (command === 'gyula') {
 		message.channel.send('Iratkozz fel Gyulara!\n\n https://www.youtube.com/channel/UCzP3tDd5-GxPxRct2lbsQlw');
 	}
+	else if (command === 'christmas') {
+		const now = new Date();
+		const currentMonth = (now.getMonth() + 1);
+		const currentDay = now.getDate();
+		let nextChristmasYear = now.getFullYear();
+
+		if(currentMonth == 12 && currentDay > 25) {
+			nextChristmasYear = nextChristmasYear + 1;
+		}
+
+		const nextChristmasDate = nextChristmasYear + '-12-25T00:00:00.000Z';
+		const christmasDay = new Date(nextChristmasDate);
+		let diffSeconds = Math.floor((christmasDay.getTime() - now.getTime()) / 1000);
+		let day = 0;
+		let hours = 0;
+		let minutes = 0;
+		let seconds = 0;
+
+		if(currentMonth != 12 || (currentMonth == 12 && currentDay != 25)) {
+			day = Math.floor(diffSeconds / (3600 * 24));
+			diffSeconds -= day * 3600 * 24;
+			hours = Math.floor(diffSeconds / 3600);
+			diffSeconds -= hours * 3600;
+			minutes = Math.floor(diffSeconds / 60);
+			diffSeconds -= minutes * 60;
+			seconds = diffSeconds;
+		}
+
+		message.channel.send(`Huhu! Mar csak ${day} nap, ${hours} ora, ${minutes} perc es ${seconds} banan van hatra Karacsonyig!!!!!`);
+	}
 	else if (command === 'class') {
 		if(args.length < 2 || args.length > 2) {
 			message.channel.send('Te buta! Ezt igy kell hasznalni: !class \'felcsoportod\' \'tantargy\' \nTargyak: logfunk, data, java, num, linux, stat, english \nPelda: !class 523/2 java');
