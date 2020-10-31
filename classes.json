@@ -1,11 +1,58 @@
 {
     "logfunk": {
         "lect": "https://teams.microsoft.com/l/channel/19%3a987f440164cc45ebb71a108eb243f753%40thread.tacv2/El%25C5%2591ad%25C3%25A1s?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095",
+        "sem": "https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095",
+        "lab": "https://teams.microsoft.com/l/channel/19%3a74eafc5a75e741868532abdb71add06b%40thread.tacv2/Labor?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095"
+    },
+    "data": {
+        "lect": "https://zoom.us/j/98569115531?pwd=L1MwVVQ1dVdQblMzY2FDV2tWQ3Z5dz09",
         "sem": {
-            "521_1": "https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095",
-            "521_2": "https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095",
-            "522_1": "https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095"
+            "521": "https://zoom.us/j/98279368344?pwd=WnkvbmpjeTFtZ0w1YmdUdjQ3VVBXUT09",
+            "522": "https://zoom.us/j/97994513576?pwd=aDllRm5BeWJaRkZPYXdFU01QaTBaQT09",
+            "523": "https://zoom.us/j/98993615170?pwd=emcxVWNyQ1VRNEltV0J4Rld1U3hIUT09",
+            "524": "https://zoom.us/j/99493679120?pwd=clJ0QzNCQXJmNHpjUyszWXB1eGxIUT09"
         },
-        "lab": "xd"
+        "lab": {
+            "andrea": "https://teams.microsoft.com/l/channel/19%3a9d2afa13419049dfb6a46f4fe03d688c%40thread.tacv2/Labor%25C3%25B3r%25C3%25A1k%2520-%2520Doka-Moln%25C3%25A1r%2520Andrea?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095",
+            "jozsef": "https://teams.microsoft.com/l/channel/19%3ac0dab313607a4975b0c62cc6529058c8%40thread.tacv2/Labor%25C3%25B3r%25C3%25A1k%2520-%2520Kov%25C3%25A1cs%2520J%25C3%25B3zsef?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095",
+            "beata": "https://teams.microsoft.com/l/channel/19%3a7838274b1fe6469194df9784a446e51e%40thread.tacv2/Labor%25C3%25B3r%25C3%25A1k%2520-%2520L%25C5%2591rincz%2520Be%25C3%25A1ta?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095"
+        }
+    },
+    "java": {
+        "lect": "https://zoom.us/j/99906544437?pwd=TG1OYUt0TnNRRzIxbkJhQzd1UTM4dz09",
+        "sem": {
+            "521": "https://zoom.us/j/93608918970?pwd=bCt2WTNuYU5FR29mTk5leEt3dUo3UT09",
+            "522": "https://zoom.us/j/93185029499?pwd=bzJTc3BZTGZxQmZlR2dabzBBV0tKQT09",
+            "523": "https://zoom.us/j/92198145026?pwd=M3RtaFE1NHJqVjhyUlBsSjN6aDRkZz09",
+            "524": "https://zoom.us/j/98099882783?pwd=WmJDTWJMUGgrcDdESUFzK3dpS1VZUT09"
+        },
+        "lab": {
+            "521": "https://zoom.us/j/93403301837?pwd=dWk0WWNSeDdHUWxpQnltcUFLRlpZdz09",
+            "522": "https://zoom.us/j/95322517296?pwd=RUdES1VDanh0ZkI2SGwxMDhKaCtZQT09",
+            "523": "https://discord.gg/vrHCT7T",
+            "524_1": "https://zoom.us/j/95322517296?pwd=RUdES1VDanh0ZkI2SGwxMDhKaCtZQT09",
+            "524_2": "https://discord.gg/vrHCT7T"
+        }
+    },
+    "num": "https://zoom.us/j/8092820652?pwd=V2kydFZsRnZLUlZrUmc0cEdURXU3dz09",
+    "linux": {
+        "lect": "https://teams.microsoft.com/l/channel/19%3ad6e3d0fe777c4f33ae99d306b6feccbd%40thread.tacv2/General?groupId=5fa96e92-4e45-4f25-b54e-d1a60fc63a79&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095",
+        "lab": {
+            "laura": "https://teams.microsoft.com/l/channel/19%3a58de875913cc42f6b1fe9325cb344ddb%40thread.tacv2/Labor%2520-%2520R.%2520Laura?groupId=5fa96e92-4e45-4f25-b54e-d1a60fc63a79&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095",
+            "levente": "https://teams.microsoft.com/l/channel/19%3ac748498af64f474db3a7fb38063958d2%40thread.tacv2/Labor%2520-%2520V.%2520Levente?groupId=5fa96e92-4e45-4f25-b54e-d1a60fc63a79&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095"
+        }
+    },
+    "stat": {
+        "lect": "https://teams.microsoft.com/l/channel/19%3a59c025dc8bd64d59a726089120be511b%40thread.tacv2/General?groupId=2a4548c0-174a-4945-8e46-5981ae0561ab&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095",
+        "sem": {
+            "521": "https://teams.microsoft.com/l/channel/19%3a8615345489554cfda9ed4f40c5cfc89e%40thread.tacv2/1.%2520csoport%2520szemin%25C3%25A1rium?groupId=2a4548c0-174a-4945-8e46-5981ae0561ab&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095",
+            "522": "https://teams.microsoft.com/l/channel/19%3a0df889259f1e404e903a7809f1420836%40thread.tacv2/2.%2520csoport%2520szemin%25C3%25A1rium?groupId=2a4548c0-174a-4945-8e46-5981ae0561ab&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095",
+            "523": "https://teams.microsoft.com/l/channel/19%3a1f33127b403649ab895efc694130aca9%40thread.tacv2/3.csoport%2520szemin%25C3%25A1rium?groupId=2a4548c0-174a-4945-8e46-5981ae0561ab&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095",
+            "524": "https://teams.microsoft.com/l/channel/19%3ad84db62df74b4099a436b88e6877faf3%40thread.tacv2/4.%2520csoport%2520szemin%25C3%25A1rium?groupId=2a4548c0-174a-4945-8e46-5981ae0561ab&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095"
+        },
+        "lab": "https://www.google.com/url?q=https%3A%2F%2Fzoom.us%2Fj%2F2962757083%3Fpwd%3DUmJRMndzUXlTWHRYSkVHRC9xaEZDZz09&sa=D&sntz=1&usg=AFQjCNEo7AGoeHh4cixe0gQmcHgkvmphKQ"
+    },
+    "english": {
+        "lect": "https://teams.microsoft.com/l/channel/19%3a17e29916f74c4c77a8464800ac356662%40thread.tacv2/General?groupId=d17c1369-02dc-4cf4-a764-2742586fb81a&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095"
     }
 }
