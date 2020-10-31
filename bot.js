@@ -6,6 +6,8 @@ bot.login(auth.token);
 const sentinel = require('./sentinel.js');
 let sentichannel;
 
+// const classes = require('./classes.json')
+
 bot.once('ready', () => {
 	// List servers the bot is connected to
 	console.log('Channels:');
@@ -209,7 +211,7 @@ bot.on('message', message => {
 		}
 		else if (group === '521/2') {
 			if (myClass === 'logfunk') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a987f440164cc45ebb71a108eb243f753%40thread.tacv2/El%25C5%2591ad%25C3%25A1s?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nSzeminarium: https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor: https://teams.microsoft.com/l/channel/19%3a74eafc5a75e741868532abdb71add06b%40thread.tacv2/Labor?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n');
+				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a987f440164cc45ebb71a108eb243f753%40thread.tacv2/El%25C5%2591ad%25C3%25A1s?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n Szeminarium: https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor: https://teams.microsoft.com/l/channel/19%3a74eafc5a75e741868532abdb71add06b%40thread.tacv2/Labor?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n');
 			}
 			else if (myClass === 'data') {
 				message.channel.send('Eloadas: https://zoom.us/j/98569115531?pwd=L1MwVVQ1dVdQblMzY2FDV2tWQ3Z5dz09 \nSzeminarium: https://zoom.us/j/98279368344?pwd=WnkvbmpjeTFtZ0w1YmdUdjQ3VVBXUT09 \nLabor: https://teams.microsoft.com/l/channel/19%3ae12a102caf7f4796b61e2984cc3bfbd5%40thread.tacv2/General?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
@@ -232,7 +234,7 @@ bot.on('message', message => {
 		}
 		else if (group === '522/1') {
 			if (myClass === 'logfunk') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a987f440164cc45ebb71a108eb243f753%40thread.tacv2/El%25C5%2591ad%25C3%25A1s?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nSzeminarium: https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor: https://teams.microsoft.com/l/channel/19%3a74eafc5a75e741868532abdb71add06b%40thread.tacv2/Labor?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n');
+				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a987f440164cc45ebb71a108eb243f753%40thread.tacv2/El%25C5%2591ad%25C3%25A1s?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n Szeminarium: https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor: https://teams.microsoft.com/l/channel/19%3a74eafc5a75e741868532abdb71add06b%40thread.tacv2/Labor?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n');
 			}
 			else if (myClass === 'data') {
 				message.channel.send('Eloadas: https://zoom.us/j/98569115531?pwd=L1MwVVQ1dVdQblMzY2FDV2tWQ3Z5dz09 \nSzeminarium: https://zoom.us/j/97994513576?pwd=aDllRm5BeWJaRkZPYXdFU01QaTBaQT09 \nLabor: https://teams.microsoft.com/l/channel/19%3ae12a102caf7f4796b61e2984cc3bfbd5%40thread.tacv2/General?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
@@ -255,7 +257,7 @@ bot.on('message', message => {
 		}
 		else if (group === '522/2') {
 			if (myClass === 'logfunk') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a987f440164cc45ebb71a108eb243f753%40thread.tacv2/El%25C5%2591ad%25C3%25A1s?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nSzeminarium: https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor: https://teams.microsoft.com/l/channel/19%3a74eafc5a75e741868532abdb71add06b%40thread.tacv2/Labor?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n');
+				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a987f440164cc45ebb71a108eb243f753%40thread.tacv2/El%25C5%2591ad%25C3%25A1s?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n Szeminarium: https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor: https://teams.microsoft.com/l/channel/19%3a74eafc5a75e741868532abdb71add06b%40thread.tacv2/Labor?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n');
 			}
 			else if (myClass === 'data') {
 				message.channel.send('Eloadas: https://zoom.us/j/98569115531?pwd=L1MwVVQ1dVdQblMzY2FDV2tWQ3Z5dz09 \nSzeminarium: https://zoom.us/j/97994513576?pwd=aDllRm5BeWJaRkZPYXdFU01QaTBaQT09 \nLabor: https://teams.microsoft.com/l/channel/19%3ae12a102caf7f4796b61e2984cc3bfbd5%40thread.tacv2/General?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
