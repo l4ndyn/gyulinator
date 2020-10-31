@@ -3,6 +3,9 @@ const auth = require('./auth.json');
 const bot = new Discord.Client();
 bot.login(auth.token);
 
+const sentinel = require('./sentinel.js');
+let sentichannel;
+
 bot.once('ready', () => {
 	// List servers the bot is connected to
 	console.log('Channels:');
@@ -18,6 +21,14 @@ bot.once('ready', () => {
 	console.log('Emojis:');
 	bot.emojis.cache.forEach((emoji) => {
 		console.log(` -- ${emoji.name} (${emoji.toString()})`);
+	});
+
+
+	sentichannel = bot.channels.cache.get('771107817016524811');
+
+	sentinel.watch((user, msg) => {
+		console.log(`[Sentinel] ${user} >> ${msg}`);
+		sentichannel.send(`${user} >> ${msg}`);
 	});
 });
 
@@ -360,6 +371,17 @@ bot.on('message', message => {
 	}
 	else if (command === 'covid69') {
 		message.channel.send('AAAA-chooo!');
+	}
+	else if (command === 'sentinel') {
+		if (!sentinel.isStopped()) {
+			sentinel.stop();
+		}
+		else {
+			sentinel.watch((user, msg) => {
+				console.log(`[Sentinel] ${user} >> ${msg}`);
+				sentichannel.send(`${user} >> ${msg}`);
+			});
+		}
 	}
 	if (command !== 'punishment') {
 		punishment = false;

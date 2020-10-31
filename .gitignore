@@ -2,3 +2,4 @@ node_modules
 t.txt
 bot.zip
 auth.json
+sentinel-appstate*.json
