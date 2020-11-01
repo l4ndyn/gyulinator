@@ -7,7 +7,7 @@ bot.login(auth.token);
 const sentinel = require('./sentinel.js');
 let sentichannel;
 
-//let coubchannel;
+// let coubchannel;
 
 bot.once('ready', () => {
 	// List servers the bot is connected to
@@ -28,7 +28,7 @@ bot.once('ready', () => {
 
 
 	sentichannel = bot.channels.cache.get('771107817016524811');
-	//coubchannel = bot.channels.cache.get('772161257616703519');
+	// coubchannel = bot.channels.cache.get('772161257616703519');
 
 	sentinel.watch((user, msg) => {
 		console.log(`[Sentinel] ${user} >> ${msg}`);

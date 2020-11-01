@@ -62,7 +62,6 @@ module.exports = {
 					case 'event':
 						console.log(event);
 						break;
-
 					}
 				}
 			});
