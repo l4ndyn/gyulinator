@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 const Discord = require('discord.js');
 const auth = require('./auth.json');
 const bot = new Discord.Client();
@@ -6,7 +7,7 @@ bot.login(auth.token);
 const sentinel = require('./sentinel.js');
 let sentichannel;
 
-// const classes = require('./classes.json')
+//let coubchannel;
 
 bot.once('ready', () => {
 	// List servers the bot is connected to
@@ -27,6 +28,7 @@ bot.once('ready', () => {
 
 
 	sentichannel = bot.channels.cache.get('771107817016524811');
+	//coubchannel = bot.channels.cache.get('772161257616703519');
 
 	sentinel.watch((user, msg) => {
 		console.log(`[Sentinel] ${user} >> ${msg}`);
@@ -38,6 +40,7 @@ let punishment = false;
 const peacock = '<:rofi:768470560606519326>';
 
 const days = require('./daydiff.js');
+const classes = require('./classes.json');
 
 bot.on('message', message => {
 	const PREFIX = '!';
@@ -178,198 +181,34 @@ bot.on('message', message => {
 		message.channel.send(`Huhu! Mar csak ${day} nap, ${hours} ora, ${minutes} perc es ${seconds} banan van hatra Karacsonyig!!!!!`);
 	}
 	else if (command === 'class') {
-		if(args.length < 2 || args.length > 2) {
-			message.channel.send('Te buta! Ezt igy kell hasznalni: !class \'felcsoportod\' \'tantargy\' \nTargyak: logfunk, data, java, num, linux, stat, english \nPelda: !class 523/2 java');
+		if(args.length < 1 || args.length > 2) {
+			message.channel.send('Te buta! Ezt igy kell hasznalni: !class \'tantargy\' [\'csoportod/felcsoportod\'] \nTargyak: logfunk, data, java, num, linux, stat, english \nPelda: !class java 523/2 vagy !class data 521\nHa nem adsz meg csoportot, akkor is megteszem amit lehet! :)');
 			return;
 		}
 
-		const group = args.shift().toLowerCase();
-		const myClass = args.shift().toLowerCase();
+		const myClass = args[0];
+		let group = args[1];
+		if (group !== undefined) group = group.replace('/', '_');
 
-		if (group === '521/1') {
-			if (myClass === 'logfunk') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a987f440164cc45ebb71a108eb243f753%40thread.tacv2/El%25C5%2591ad%25C3%25A1s?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nSzeminarium: https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor: https://teams.microsoft.com/l/channel/19%3a74eafc5a75e741868532abdb71add06b%40thread.tacv2/Labor?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n');
+		const classInf = classes[myClass];
+
+		let msg = '';
+		if (myClass === 'num') {
+			msg = `Eloadas, Labor: ${classInf}`;
+		}
+		else {
+			msg = `Eloadas: ${classInf.lect}`;
+			if (classInf.hasOwnProperty('sem')) {
+				const link = getClassGroupLink(classInf, 'sem', group);
+				if (link !== undefined) msg += `\nSzeminarium: ${link}`;
 			}
-			else if (myClass === 'data') {
-				message.channel.send('Eloadas: https://zoom.us/j/98569115531?pwd=L1MwVVQ1dVdQblMzY2FDV2tWQ3Z5dz09 \nSzeminarium: https://zoom.us/j/98279368344?pwd=WnkvbmpjeTFtZ0w1YmdUdjQ3VVBXUT09 \nLabor: https://teams.microsoft.com/l/channel/19%3ae12a102caf7f4796b61e2984cc3bfbd5%40thread.tacv2/General?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-			else if (myClass === 'java') {
-				message.channel.send('Eloadas:https://zoom.us/j/99906544437?pwd=TG1OYUt0TnNRRzIxbkJhQzd1UTM4dz09 \nSzeminarium: https://zoom.us/j/93608918970?pwd=bCt2WTNuYU5FR29mTk5leEt3dUo3UT09 \nLabor: https://zoom.us/j/93403301837?pwd=dWk0WWNSeDdHUWxpQnltcUFLRlpZdz09');
-			}
-			else if (myClass === 'num') {
-				message.channel.send('Eloadas, Szeminarium, Labor: https://zoom.us/j/8092820652?pwd=V2kydFZsRnZLUlZrUmc0cEdURXU3dz09');
-			}
-			else if (myClass === 'linux') {
-				message.channel.send('Eloadas, Labor: https://teams.microsoft.com/l/channel/19%3ad6e3d0fe777c4f33ae99d306b6feccbd%40thread.tacv2/General?groupId=5fa96e92-4e45-4f25-b54e-d1a60fc63a79&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-			else if (myClass === 'stat') {
-				message.channel.send('Eloadas, Szeminarium: https://teams.microsoft.com/l/channel/19%3a59c025dc8bd64d59a726089120be511b%40thread.tacv2/General?groupId=2a4548c0-174a-4945-8e46-5981ae0561ab&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor, Hetfo esti kurzus: https://zoom.us/j/2962757083?pwd=UmJRMndzUXlTWHRYSkVHRC9xaEZDZz09');
-			}
-			else if (myClass === 'english') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a17e29916f74c4c77a8464800ac356662%40thread.tacv2/General?groupId=d17c1369-02dc-4cf4-a764-2742586fb81a&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
+			if (classInf.hasOwnProperty('lab')) {
+				const link = getClassGroupLink(classInf, 'lab', group);
+				if (link !== undefined) msg += `\nLabor: ${link}`;
 			}
 		}
-		else if (group === '521/2') {
-			if (myClass === 'logfunk') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a987f440164cc45ebb71a108eb243f753%40thread.tacv2/El%25C5%2591ad%25C3%25A1s?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n Szeminarium: https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor: https://teams.microsoft.com/l/channel/19%3a74eafc5a75e741868532abdb71add06b%40thread.tacv2/Labor?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n');
-			}
-			else if (myClass === 'data') {
-				message.channel.send('Eloadas: https://zoom.us/j/98569115531?pwd=L1MwVVQ1dVdQblMzY2FDV2tWQ3Z5dz09 \nSzeminarium: https://zoom.us/j/98279368344?pwd=WnkvbmpjeTFtZ0w1YmdUdjQ3VVBXUT09 \nLabor: https://teams.microsoft.com/l/channel/19%3ae12a102caf7f4796b61e2984cc3bfbd5%40thread.tacv2/General?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-			else if (myClass === 'java') {
-				message.channel.send('Eloadas:https://zoom.us/j/99906544437?pwd=TG1OYUt0TnNRRzIxbkJhQzd1UTM4dz09 \nSzeminarium: https://zoom.us/j/93608918970?pwd=bCt2WTNuYU5FR29mTk5leEt3dUo3UT09 \nLabor: https://zoom.us/j/93403301837?pwd=dWk0WWNSeDdHUWxpQnltcUFLRlpZdz09');
-			}
-			else if (myClass === 'num') {
-				message.channel.send('Eloadas, Szeminarium, Labor: https://zoom.us/j/8092820652?pwd=V2kydFZsRnZLUlZrUmc0cEdURXU3dz09');
-			}
-			else if (myClass === 'linux') {
-				message.channel.send('Eloadas, Labor: https://teams.microsoft.com/l/channel/19%3ad6e3d0fe777c4f33ae99d306b6feccbd%40thread.tacv2/General?groupId=5fa96e92-4e45-4f25-b54e-d1a60fc63a79&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-			else if (myClass === 'stat') {
-				message.channel.send('Eloadas, Szeminarium: https://teams.microsoft.com/l/channel/19%3a59c025dc8bd64d59a726089120be511b%40thread.tacv2/General?groupId=2a4548c0-174a-4945-8e46-5981ae0561ab&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor, Hetfo esti kurzus: https://zoom.us/j/2962757083?pwd=UmJRMndzUXlTWHRYSkVHRC9xaEZDZz09');
-			}
-			else if (myClass === 'english') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a17e29916f74c4c77a8464800ac356662%40thread.tacv2/General?groupId=d17c1369-02dc-4cf4-a764-2742586fb81a&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-		}
-		else if (group === '522/1') {
-			if (myClass === 'logfunk') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a987f440164cc45ebb71a108eb243f753%40thread.tacv2/El%25C5%2591ad%25C3%25A1s?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n Szeminarium: https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor: https://teams.microsoft.com/l/channel/19%3a74eafc5a75e741868532abdb71add06b%40thread.tacv2/Labor?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n');
-			}
-			else if (myClass === 'data') {
-				message.channel.send('Eloadas: https://zoom.us/j/98569115531?pwd=L1MwVVQ1dVdQblMzY2FDV2tWQ3Z5dz09 \nSzeminarium: https://zoom.us/j/97994513576?pwd=aDllRm5BeWJaRkZPYXdFU01QaTBaQT09 \nLabor: https://teams.microsoft.com/l/channel/19%3ae12a102caf7f4796b61e2984cc3bfbd5%40thread.tacv2/General?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-			else if (myClass === 'java') {
-				message.channel.send('Eloadas:https://zoom.us/j/99906544437?pwd=TG1OYUt0TnNRRzIxbkJhQzd1UTM4dz09 \nSzeminarium: https://zoom.us/j/93185029499?pwd=bzJTc3BZTGZxQmZlR2dabzBBV0tKQT09 \nLabor: https://zoom.us/j/95322517296?pwd=RUdES1VDanh0ZkI2SGwxMDhKaCtZQT09');
-			}
-			else if (myClass === 'num') {
-				message.channel.send('Eloadas, Szeminarium, Labor: https://zoom.us/j/8092820652?pwd=V2kydFZsRnZLUlZrUmc0cEdURXU3dz09');
-			}
-			else if (myClass === 'linux') {
-				message.channel.send('Eloadas, Labor: https://teams.microsoft.com/l/channel/19%3ad6e3d0fe777c4f33ae99d306b6feccbd%40thread.tacv2/General?groupId=5fa96e92-4e45-4f25-b54e-d1a60fc63a79&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-			else if (myClass === 'stat') {
-				message.channel.send('Eloadas, Szeminarium: https://teams.microsoft.com/l/channel/19%3a59c025dc8bd64d59a726089120be511b%40thread.tacv2/General?groupId=2a4548c0-174a-4945-8e46-5981ae0561ab&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor, Hetfo esti kurzus: https://zoom.us/j/2962757083?pwd=UmJRMndzUXlTWHRYSkVHRC9xaEZDZz09');
-			}
-			else if (myClass === 'english') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a17e29916f74c4c77a8464800ac356662%40thread.tacv2/General?groupId=d17c1369-02dc-4cf4-a764-2742586fb81a&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-		}
-		else if (group === '522/2') {
-			if (myClass === 'logfunk') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a987f440164cc45ebb71a108eb243f753%40thread.tacv2/El%25C5%2591ad%25C3%25A1s?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n Szeminarium: https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor: https://teams.microsoft.com/l/channel/19%3a74eafc5a75e741868532abdb71add06b%40thread.tacv2/Labor?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n');
-			}
-			else if (myClass === 'data') {
-				message.channel.send('Eloadas: https://zoom.us/j/98569115531?pwd=L1MwVVQ1dVdQblMzY2FDV2tWQ3Z5dz09 \nSzeminarium: https://zoom.us/j/97994513576?pwd=aDllRm5BeWJaRkZPYXdFU01QaTBaQT09 \nLabor: https://teams.microsoft.com/l/channel/19%3ae12a102caf7f4796b61e2984cc3bfbd5%40thread.tacv2/General?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-			else if (myClass === 'java') {
-				message.channel.send('Eloadas:https://zoom.us/j/99906544437?pwd=TG1OYUt0TnNRRzIxbkJhQzd1UTM4dz09 \nSzeminarium: https://zoom.us/j/93185029499?pwd=bzJTc3BZTGZxQmZlR2dabzBBV0tKQT09 \nLabor: https://zoom.us/j/95322517296?pwd=RUdES1VDanh0ZkI2SGwxMDhKaCtZQT09');
-			}
-			else if (myClass === 'num') {
-				message.channel.send('Eloadas, Szeminarium, Labor: https://zoom.us/j/8092820652?pwd=V2kydFZsRnZLUlZrUmc0cEdURXU3dz09');
-			}
-			else if (myClass === 'linux') {
-				message.channel.send('Eloadas, Labor: https://teams.microsoft.com/l/channel/19%3ad6e3d0fe777c4f33ae99d306b6feccbd%40thread.tacv2/General?groupId=5fa96e92-4e45-4f25-b54e-d1a60fc63a79&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-			else if (myClass === 'stat') {
-				message.channel.send('Eloadas, Szeminarium: https://teams.microsoft.com/l/channel/19%3a59c025dc8bd64d59a726089120be511b%40thread.tacv2/General?groupId=2a4548c0-174a-4945-8e46-5981ae0561ab&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor, Hetfo esti kurzus: https://zoom.us/j/2962757083?pwd=UmJRMndzUXlTWHRYSkVHRC9xaEZDZz09');
-			}
-			else if (myClass === 'english') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a17e29916f74c4c77a8464800ac356662%40thread.tacv2/General?groupId=d17c1369-02dc-4cf4-a764-2742586fb81a&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-		}
-		else if (group === '523/1') {
-			if (myClass === 'logfunk') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a987f440164cc45ebb71a108eb243f753%40thread.tacv2/El%25C5%2591ad%25C3%25A1s?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nSzeminarium: https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor: https://teams.microsoft.com/l/channel/19%3a74eafc5a75e741868532abdb71add06b%40thread.tacv2/Labor?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n');
-			}
-			else if (myClass === 'data') {
-				message.channel.send('Eloadas: https://zoom.us/j/98569115531?pwd=L1MwVVQ1dVdQblMzY2FDV2tWQ3Z5dz09 \nSzeminarium: https://zoom.us/j/98993615170?pwd=emcxVWNyQ1VRNEltV0J4Rld1U3hIUT09 \nLabor: https://teams.microsoft.com/l/channel/19%3ae12a102caf7f4796b61e2984cc3bfbd5%40thread.tacv2/General?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-			else if (myClass === 'java') {
-				message.channel.send('Eloadas:https://zoom.us/j/99906544437?pwd=TG1OYUt0TnNRRzIxbkJhQzd1UTM4dz09 \nSzeminarium: https://zoom.us/j/92198145026?pwd=M3RtaFE1NHJqVjhyUlBsSjN6aDRkZz09 \nLabor: https://discord.gg/vrHCT7T');
-			}
-			else if (myClass === 'num') {
-				message.channel.send('Eloadas, Szeminarium, Labor: https://zoom.us/j/8092820652?pwd=V2kydFZsRnZLUlZrUmc0cEdURXU3dz09');
-			}
-			else if (myClass === 'linux') {
-				message.channel.send('Eloadas, Labor: https://teams.microsoft.com/l/channel/19%3ad6e3d0fe777c4f33ae99d306b6feccbd%40thread.tacv2/General?groupId=5fa96e92-4e45-4f25-b54e-d1a60fc63a79&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-			else if (myClass === 'stat') {
-				message.channel.send('Eloadas, Szeminarium: https://teams.microsoft.com/l/channel/19%3a59c025dc8bd64d59a726089120be511b%40thread.tacv2/General?groupId=2a4548c0-174a-4945-8e46-5981ae0561ab&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor, Hetfo esti kurzus: https://zoom.us/j/2962757083?pwd=UmJRMndzUXlTWHRYSkVHRC9xaEZDZz09');
-			}
-			else if (myClass === 'english') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a17e29916f74c4c77a8464800ac356662%40thread.tacv2/General?groupId=d17c1369-02dc-4cf4-a764-2742586fb81a&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-		}
-		else if (group === '523/2') {
-			if (myClass === 'logfunk') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a987f440164cc45ebb71a108eb243f753%40thread.tacv2/El%25C5%2591ad%25C3%25A1s?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nSzeminarium: https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor: https://teams.microsoft.com/l/channel/19%3a74eafc5a75e741868532abdb71add06b%40thread.tacv2/Labor?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n');
-			}
-			else if (myClass === 'data') {
-				message.channel.send('Eloadas: https://zoom.us/j/98569115531?pwd=L1MwVVQ1dVdQblMzY2FDV2tWQ3Z5dz09 \nSzeminarium: https://zoom.us/j/98993615170?pwd=emcxVWNyQ1VRNEltV0J4Rld1U3hIUT09 \nLabor: https://teams.microsoft.com/l/channel/19%3ae12a102caf7f4796b61e2984cc3bfbd5%40thread.tacv2/General?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-			else if (myClass === 'java') {
-				message.channel.send('Eloadas:https://zoom.us/j/99906544437?pwd=TG1OYUt0TnNRRzIxbkJhQzd1UTM4dz09 \nSzeminarium: https://zoom.us/j/92198145026?pwd=M3RtaFE1NHJqVjhyUlBsSjN6aDRkZz09 \nLabor: https://discord.gg/vrHCT7T');
-			}
-			else if (myClass === 'num') {
-				message.channel.send('Eloadas, Szeminarium, Labor: https://zoom.us/j/8092820652?pwd=V2kydFZsRnZLUlZrUmc0cEdURXU3dz09');
-			}
-			else if (myClass === 'linux') {
-				message.channel.send('Eloadas, Labor: https://teams.microsoft.com/l/channel/19%3ad6e3d0fe777c4f33ae99d306b6feccbd%40thread.tacv2/General?groupId=5fa96e92-4e45-4f25-b54e-d1a60fc63a79&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-			else if (myClass === 'stat') {
-				message.channel.send('Eloadas, Szeminarium: https://teams.microsoft.com/l/channel/19%3a59c025dc8bd64d59a726089120be511b%40thread.tacv2/General?groupId=2a4548c0-174a-4945-8e46-5981ae0561ab&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor, Hetfo esti kurzus: https://zoom.us/j/2962757083?pwd=UmJRMndzUXlTWHRYSkVHRC9xaEZDZz09');
-			}
-			else if (myClass === 'english') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a17e29916f74c4c77a8464800ac356662%40thread.tacv2/General?groupId=d17c1369-02dc-4cf4-a764-2742586fb81a&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-		}
-		else if (group === '524/1') {
-			if (myClass === 'logfunk') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a987f440164cc45ebb71a108eb243f753%40thread.tacv2/El%25C5%2591ad%25C3%25A1s?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nSzeminarium: https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor: https://teams.microsoft.com/l/channel/19%3a74eafc5a75e741868532abdb71add06b%40thread.tacv2/Labor?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n');
-			}
-			else if (myClass === 'data') {
-				message.channel.send('Eloadas: https://zoom.us/j/98569115531?pwd=L1MwVVQ1dVdQblMzY2FDV2tWQ3Z5dz09 \nSzeminarium: https://zoom.us/j/99493679120?pwd=clJ0QzNCQXJmNHpjUyszWXB1eGxIUT09 \nLabor: https://teams.microsoft.com/l/channel/19%3ae12a102caf7f4796b61e2984cc3bfbd5%40thread.tacv2/General?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-			else if (myClass === 'java') {
-				message.channel.send('Eloadas:https://zoom.us/j/99906544437?pwd=TG1OYUt0TnNRRzIxbkJhQzd1UTM4dz09 \nSzeminarium: https://zoom.us/j/98099882783?pwd=WmJDTWJMUGgrcDdESUFzK3dpS1VZUT09 \nLabor: https://zoom.us/j/95322517296?pwd=RUdES1VDanh0ZkI2SGwxMDhKaCtZQT09');
-			}
-			else if (myClass === 'num') {
-				message.channel.send('Eloadas, Szeminarium, Labor: https://zoom.us/j/8092820652?pwd=V2kydFZsRnZLUlZrUmc0cEdURXU3dz09');
-			}
-			else if (myClass === 'linux') {
-				message.channel.send('Eloadas, Labor: https://teams.microsoft.com/l/channel/19%3ad6e3d0fe777c4f33ae99d306b6feccbd%40thread.tacv2/General?groupId=5fa96e92-4e45-4f25-b54e-d1a60fc63a79&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-			else if (myClass === 'stat') {
-				message.channel.send('Eloadas, Szeminarium: https://teams.microsoft.com/l/channel/19%3a59c025dc8bd64d59a726089120be511b%40thread.tacv2/General?groupId=2a4548c0-174a-4945-8e46-5981ae0561ab&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor, Hetfo esti kurzus: https://zoom.us/j/2962757083?pwd=UmJRMndzUXlTWHRYSkVHRC9xaEZDZz09');
-			}
-			else if (myClass === 'english') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a17e29916f74c4c77a8464800ac356662%40thread.tacv2/General?groupId=d17c1369-02dc-4cf4-a764-2742586fb81a&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-		}
-		else if (group === '524/2') {
-			if (myClass === 'logfunk') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a987f440164cc45ebb71a108eb243f753%40thread.tacv2/El%25C5%2591ad%25C3%25A1s?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nSzeminarium: https://teams.microsoft.com/l/channel/19%3ab90e63e21a2e4900be1f8c6cbc26cfde%40thread.tacv2/Szemin%25C3%25A1rium?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor: https://teams.microsoft.com/l/channel/19%3a74eafc5a75e741868532abdb71add06b%40thread.tacv2/Labor?groupId=11bff833-213a-4e2e-a6f0-758fa461a44c&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \n');
-			}
-			else if (myClass === 'data') {
-				message.channel.send('Eloadas: https://zoom.us/j/98569115531?pwd=L1MwVVQ1dVdQblMzY2FDV2tWQ3Z5dz09 \nSzeminarium: https://zoom.us/j/99493679120?pwd=clJ0QzNCQXJmNHpjUyszWXB1eGxIUT09 \nLabor: https://teams.microsoft.com/l/channel/19%3ae12a102caf7f4796b61e2984cc3bfbd5%40thread.tacv2/General?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-			else if (myClass === 'java') {
-				message.channel.send('Eloadas:https://zoom.us/j/99906544437?pwd=TG1OYUt0TnNRRzIxbkJhQzd1UTM4dz09 \nSzeminarium: https://zoom.us/j/98099882783?pwd=WmJDTWJMUGgrcDdESUFzK3dpS1VZUT09 \nLabor: https://discord.gg/vrHCT7T');
-			}
-			else if (myClass === 'num') {
-				message.channel.send('Eloadas, Szeminarium, Labor: https://zoom.us/j/8092820652?pwd=V2kydFZsRnZLUlZrUmc0cEdURXU3dz09');
-			}
-			else if (myClass === 'linux') {
-				message.channel.send('Eloadas, Labor: https://teams.microsoft.com/l/channel/19%3ad6e3d0fe777c4f33ae99d306b6feccbd%40thread.tacv2/General?groupId=5fa96e92-4e45-4f25-b54e-d1a60fc63a79&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-			else if (myClass === 'stat') {
-				message.channel.send('Eloadas, Szeminarium: https://teams.microsoft.com/l/channel/19%3a59c025dc8bd64d59a726089120be511b%40thread.tacv2/General?groupId=2a4548c0-174a-4945-8e46-5981ae0561ab&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095 \nLabor, Hetfo esti kurzus: https://zoom.us/j/2962757083?pwd=UmJRMndzUXlTWHRYSkVHRC9xaEZDZz09');
-			}
-			else if (myClass === 'english') {
-				message.channel.send('Eloadas: https://teams.microsoft.com/l/channel/19%3a17e29916f74c4c77a8464800ac356662%40thread.tacv2/General?groupId=d17c1369-02dc-4cf4-a764-2742586fb81a&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095');
-			}
-		}
+
+		message.channel.send(msg);
 	}
 	else if (command === 'covid69') {
 		message.channel.send('AAAA-chooo!');
@@ -389,3 +228,18 @@ bot.on('message', message => {
 		punishment = false;
 	}
 });
+
+function getClassGroupLink(classInf, type, group) {
+	classInf = classInf[type];
+	if (group !== undefined) {
+		if (!classInf.hasOwnProperty(group)) group = group.split('_')[0];
+		if (classInf.hasOwnProperty(classInf[group])) return classInf[classInf[group]];
+
+		return classInf[group];
+	}
+	else if (classInf.hasOwnProperty('521')) {
+		return undefined;
+	}
+
+	return classInf;
+}
