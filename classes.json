@@ -12,11 +12,7 @@
             "523": "https://zoom.us/j/98993615170?pwd=emcxVWNyQ1VRNEltV0J4Rld1U3hIUT09",
             "524": "https://zoom.us/j/99493679120?pwd=clJ0QzNCQXJmNHpjUyszWXB1eGxIUT09"
         },
-        "lab": {
-            "andrea": "https://teams.microsoft.com/l/channel/19%3a9d2afa13419049dfb6a46f4fe03d688c%40thread.tacv2/Labor%25C3%25B3r%25C3%25A1k%2520-%2520Doka-Moln%25C3%25A1r%2520Andrea?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095",
-            "jozsef": "https://teams.microsoft.com/l/channel/19%3ac0dab313607a4975b0c62cc6529058c8%40thread.tacv2/Labor%25C3%25B3r%25C3%25A1k%2520-%2520Kov%25C3%25A1cs%2520J%25C3%25B3zsef?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095",
-            "beata": "https://teams.microsoft.com/l/channel/19%3a7838274b1fe6469194df9784a446e51e%40thread.tacv2/Labor%25C3%25B3r%25C3%25A1k%2520-%2520L%25C5%2591rincz%2520Be%25C3%25A1ta?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095"
-        }
+        "lab": "https://teams.microsoft.com/l/channel/19%3ae12a102caf7f4796b61e2984cc3bfbd5%40thread.tacv2/General?groupId=2f1905e0-f164-4ee7-abf1-2a3105431020&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095"
     },
     "java": {
         "lect": "https://zoom.us/j/99906544437?pwd=TG1OYUt0TnNRRzIxbkJhQzd1UTM4dz09",
@@ -38,6 +34,11 @@
     "linux": {
         "lect": "https://teams.microsoft.com/l/channel/19%3ad6e3d0fe777c4f33ae99d306b6feccbd%40thread.tacv2/General?groupId=5fa96e92-4e45-4f25-b54e-d1a60fc63a79&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095",
         "lab": {
+            "521": "laura",
+            "522_1": "laura",
+            "522_2": "levente",
+            "523": "levente",
+            "524": "levente",
             "laura": "https://teams.microsoft.com/l/channel/19%3a58de875913cc42f6b1fe9325cb344ddb%40thread.tacv2/Labor%2520-%2520R.%2520Laura?groupId=5fa96e92-4e45-4f25-b54e-d1a60fc63a79&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095",
             "levente": "https://teams.microsoft.com/l/channel/19%3ac748498af64f474db3a7fb38063958d2%40thread.tacv2/Labor%2520-%2520V.%2520Levente?groupId=5fa96e92-4e45-4f25-b54e-d1a60fc63a79&tenantId=5a4863ed-40c8-4fd5-8298-fbfdb7f13095"
         }
