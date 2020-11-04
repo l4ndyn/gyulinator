@@ -16,7 +16,7 @@ catch {
 let stopped = false;
 
 module.exports = {
-	watch: function(callback) {
+	watch: function(callback_msg, callback_photo) {
 		if (appState === undefined) {
 			return;
 		}
@@ -40,7 +40,9 @@ module.exports = {
 					switch(event.type) {
 					case 'message':
 						let msg = event.body;
+						let isPhoto = false;
 						if (event.attachments.length == 1 && event.attachments[0].type == 'photo') {
+							isPhoto = true;
 							msg = event.attachments[0].largePreviewUrl;
 						}
 
@@ -52,8 +54,10 @@ module.exports = {
 								if(ret.hasOwnProperty(prop)) {
 									user = ret[prop].name;
 
-									// console.log(`[Sentinelc] ${user} >> ${msg}`);
-									if (user !== undefined) callback(user, msg);
+									if (user !== undefined) { 
+										if (!isPhoto) callback_msg(user, msg);
+										else callback_photo(user, msg);
+									}
 								}
 							}
 						});
