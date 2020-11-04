@@ -233,6 +233,8 @@ function getClassGroupLink(classInf, type, group) {
 	classInf = classInf[type];
 	if (group !== undefined) {
 		if (!classInf.hasOwnProperty(group)) group = group.split('_')[0];
+		if (!classInf.hasOwnProperty(group)) return classInf;
+		
 		if (classInf.hasOwnProperty(classInf[group])) return classInf[classInf[group]];
 
 		return classInf[group];

@@ -7,7 +7,7 @@ const login = require('facebook-chat-api');
 
 let appState;
 try {
-	appState = require('./sentinel-appstate-a.json');
+	appState = require('./sentinel-appstate-g.json');
 }
 catch {
 	console.log('[Sentinel] App state not found. Sentinel will terminate.');
