@@ -30,10 +30,7 @@ bot.once('ready', () => {
 	sentichannel = bot.channels.cache.get('771107817016524811');
 	// coubchannel = bot.channels.cache.get('772161257616703519');
 
-	sentinel.watch((user, msg) => {
-		console.log(`[Sentinel] ${user} >> ${msg}`);
-		sentichannel.send(`${user} >> ${msg}`);
-	});
+	sentinel_watch();
 });
 
 let punishment = false;
@@ -208,7 +205,7 @@ bot.on('message', message => {
 			}
 		}
 
-		message.channel.send(msg);
+		message.channel.send(msg).then((sent_msg) => sent_msg.suppressEmbeds());
 	}
 	else if (command === 'covid69') {
 		message.channel.send('AAAA-chooo!');
@@ -218,10 +215,7 @@ bot.on('message', message => {
 			sentinel.stop();
 		}
 		else {
-			sentinel.watch((user, msg) => {
-				console.log(`[Sentinel] ${user} >> ${msg}`);
-				sentichannel.send(`${user} >> ${msg}`);
-			});
+			sentinel_watch();
 		}
 	}
 	if (command !== 'punishment') {
@@ -233,6 +227,8 @@ function getClassGroupLink(classInf, type, group) {
 	classInf = classInf[type];
 	if (group !== undefined) {
 		if (!classInf.hasOwnProperty(group)) group = group.split('_')[0];
+		if (!classInf.hasOwnProperty(group)) return classInf;
+
 		if (classInf.hasOwnProperty(classInf[group])) return classInf[classInf[group]];
 
 		return classInf[group];
@@ -242,4 +238,16 @@ function getClassGroupLink(classInf, type, group) {
 	}
 
 	return classInf;
+}
+
+function sentinel_watch() {
+	sentinel.watch((user, msg) => {
+		console.log(`[Sentinel] ${user} >> ${msg}`);
+		sentichannel.send(`**${user}** >> ${msg}`);
+	},
+	(user, photo) => {
+		console.log(`[Sentinel] ${user} >> ${photo}`);
+		sentichannel.send(`**${user}** >>`);
+		sentichannel.send(`${photo}`);
+	});
 }
