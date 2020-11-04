@@ -16,7 +16,7 @@ catch {
 let stopped = false;
 
 module.exports = {
-	watch: function(callback_msg, callback_photo) {
+	watch: function(callback_msg, callback_photo, callback_reply) {
 		if (appState === undefined) {
 			return;
 		}
@@ -36,39 +36,60 @@ module.exports = {
 					return stopListening();
 				}
 
-				if (event.threadID == '2562332187160337') {
+				//if (event.threadID == '2562332187160337') {
 					switch(event.type) {
 					case 'message':
-						let msg = event.body;
-						let isPhoto = false;
-						if (event.attachments.length == 1 && event.attachments[0].type == 'photo') {
-							isPhoto = true;
-							msg = event.attachments[0].largePreviewUrl;
-						}
-
-						let user = 'unknown';
-						api.getUserInfo(event.senderID, (err, ret) => {
-							if(err) return console.error(err);
-
-							for(const prop in ret) {
-								if(ret.hasOwnProperty(prop)) {
-									user = ret[prop].name;
-
-									if (user !== undefined) { 
-										if (!isPhoto) callback_msg(user, msg);
-										else callback_photo(user, msg);
-									}
-								}
+						getContent(event, (user, msg, isPhoto) => {
+							if (user !== undefined) { 
+								if (!isPhoto) callback_msg(user, msg);
+								else callback_photo(user, msg);
 							}
 						});
 
+						break;
+					case 'message_reply':
+						getContent(event, (user, msg, isPhoto) => {
+							if (user !== undefined) { 
+								getContent(event.messageReply, (r_user, r_msg, r_isPhoto) => {
+									if (r_user !== undefined) { 
+										if (!r_isPhoto) callback_msg(r_user, r_msg, true);
+										else callback_photo(r_user, r_msg, true);
+
+										if (!isPhoto) callback_msg(user, msg, false);
+										else callback_photo(user, msg, false);
+									}
+								});
+							}
+						});
+						
 						break;
 					case 'event':
 						console.log(event);
 						break;
 					}
-				}
+				//}
 			});
+
+			function getContent(event, callback) {
+				let msg = event.body;
+				let isPhoto = false;
+				if (event.attachments.length == 1 && event.attachments[0].type == 'photo') {
+					isPhoto = true;
+					msg = event.attachments[0].largePreviewUrl;
+				}
+			
+				let user = 'unknown';
+				api.getUserInfo(event.senderID, (err, ret) => {
+					if(err) return console.error(err);
+			
+					for(const prop in ret) {
+						if(ret.hasOwnProperty(prop)) {
+							user = ret[prop].name;
+							callback(user, msg, isPhoto);
+						}
+					}
+				});
+			}
 		});
 	},
 	stop: function() {
