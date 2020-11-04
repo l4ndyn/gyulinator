@@ -36,7 +36,7 @@ module.exports = {
 					return stopListening();
 				}
 
-				//if (event.threadID == '2562332187160337') {
+				if (event.threadID == '2562332187160337') {
 					switch(event.type) {
 					case 'message':
 						getContent(event, (user, msg, isPhoto) => {
@@ -61,13 +61,13 @@ module.exports = {
 								});
 							}
 						});
-						
+
 						break;
 					case 'event':
 						console.log(event);
 						break;
 					}
-				//}
+				}
 			});
 
 			function getContent(event, callback) {
