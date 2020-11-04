@@ -11,17 +11,18 @@ let sentichannel;
 
 bot.once('ready', () => {
 	// List servers the bot is connected to
-	console.log('Channels:');
+	console.log('Servers:');
 	bot.guilds.cache.forEach((guild) => {
 		console.log(' - ' + guild.name);
 
 		// List all channels
+		console.log(' .. Channels:');
 		guild.channels.cache.forEach((channel) => {
 			console.log(` -- ${channel.name} (${channel.type}) - ${channel.id}`);
 		});
 	});
 
-	console.log('Emojis:');
+	console.log(' .. Emojis:');
 	bot.emojis.cache.forEach((emoji) => {
 		console.log(` -- ${emoji.name} (${emoji.toString()})`);
 	});
@@ -241,13 +242,25 @@ function getClassGroupLink(classInf, type, group) {
 }
 
 function sentinel_watch() {
-	sentinel.watch((user, msg) => {
-		console.log(`[Sentinel] ${user} >> ${msg}`);
-		sentichannel.send(`**${user}** >> ${msg}`);
+	sentinel.watch((user, msg, isReplied = false) => {
+		if (!isReplied) {
+			console.log(`[Sentinel] ${user} >> ${msg}`);
+			sentichannel.send(`**${user}** >> ${msg}`);
+		}
+		else {
+			console.log(`[Sentinel] > ${user} >> ${msg}`);
+			sentichannel.send(`> **${user}** >> ${msg}`);
+		}
 	},
-	(user, photo) => {
-		console.log(`[Sentinel] ${user} >> ${photo}`);
-		sentichannel.send(`**${user}** >>`);
-		sentichannel.send(`${photo}`);
+	(user, photo, isReplied = false) => {
+		if (!isReplied) {
+			console.log(`[Sentinel] ${user} >> ${photo}`);
+			sentichannel.send(`**${user}** >>`);
+			sentichannel.send(`${photo}`);
+		}
+		else {
+			console.log(`[Sentinel] > ${user} >> ${photo}`);
+			sentichannel.send(`> **${user}** >> ${photo}`);
+		}
 	});
 }
