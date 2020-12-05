@@ -2,7 +2,7 @@
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable no-case-declarations */
 
-// fs = require('fs');
+// const fs = require('fs');
 const login = require('facebook-chat-api');
 
 let appState;
@@ -40,7 +40,7 @@ module.exports = {
 					switch(event.type) {
 					case 'message':
 						getContent(event, (user, msg, isPhoto) => {
-							if (user !== undefined) { 
+							if (user !== undefined) {
 								if (!isPhoto) callback_msg(user, msg);
 								else callback_photo(user, msg);
 							}
@@ -49,9 +49,9 @@ module.exports = {
 						break;
 					case 'message_reply':
 						getContent(event, (user, msg, isPhoto) => {
-							if (user !== undefined) { 
+							if (user !== undefined) {
 								getContent(event.messageReply, (r_user, r_msg, r_isPhoto) => {
-									if (r_user !== undefined) { 
+									if (r_user !== undefined) {
 										if (!r_isPhoto) callback_msg(r_user, r_msg, true);
 										else callback_photo(r_user, r_msg, true);
 
@@ -77,11 +77,11 @@ module.exports = {
 					isPhoto = true;
 					msg = event.attachments[0].largePreviewUrl;
 				}
-			
+
 				let user = 'unknown';
 				api.getUserInfo(event.senderID, (err, ret) => {
 					if(err) return console.error(err);
-			
+
 					for(const prop in ret) {
 						if(ret.hasOwnProperty(prop)) {
 							user = ret[prop].name;

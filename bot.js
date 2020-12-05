@@ -191,8 +191,7 @@ bot.on('message', message => {
 		}
 
 		let group = args[1];
-		if (group !== undefined) 
-		{
+		if (group !== undefined) {
 			const check = group.match(/52[1-4](\/[1-2])?/g);
 			if (check == null || check[0].length < group.length) {
 				message.channel.send('Te buta! Ilyen csoport nem is letezik! Biztos ide jarsz?');
