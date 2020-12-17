@@ -7,6 +7,9 @@ bot.login(auth.token);
 const sentinel = require('./sentinel.js');
 let sentichannel;
 
+const fs = require('fs');
+const lat = require('./latinize.js');
+
 // let coubchannel;
 
 bot.once('ready', () => {
@@ -53,7 +56,7 @@ bot.on('message', message => {
 			message.channel.send('Nem!');
 		}
 		else {
-			message.channel.send('- Ping \n- week \n- actest \n- cave \n- gyula \n- punishment \n- class \n- christmas \n- covid69');
+			message.channel.send('- Ping \n- week \n- actest \n- cave \n- gyula \n- punishment \n- class \n- christmas \n- covid69 \n-skribbl ');
 		}
 	}
 	else if (command === 'ping') {
@@ -222,6 +225,30 @@ bot.on('message', message => {
 	}
 	else if (command === 'covid69') {
 		message.channel.send('AAAA-chooo!');
+	}
+	else if (command === 'skribbl') {
+		if (args.length < 1) {
+			message.channel.send('Ha megadsz egy szot, elmentem a FOS-ba (FOgyatekos Skribblio szavak adatbazisa), hogy majd adatbazison fogalmunk se legyen arrol, mi akar az lenni! Mukodjunk egyutt, es gyujtsunk ossze sok fogyatekos szot! :)\nA szavakat torlom a chatbol, legyen a vegeredmeny meglepetes! ;)\nIgy hasznald: !skribbl <ide egy szot vagy nevet vagy akarmit>');
+			return;
+		}
+
+		const word = args.join(' ');
+
+		fs.readFile('skribbl.txt', 'utf8', (err, words) => {
+			if (err) return console.log(err);
+
+			if (!words.split(', ').map(w => lat.latinize(w.toLowerCase())).includes(lat.latinize(word.toLowerCase()))) {
+				fs.appendFile('skribbl.txt', `, ${word}`, err => {
+					if (err) return console.log(err);
+					console.log('Skribbl word logged!');
+				});
+			}
+			else {
+				console.log('This skribbl word is already scribbled down!');
+			}
+		});
+
+		message.delete();
 	}
 	else if (command === 'sentinel') {
 		if (!sentinel.isStopped()) {
