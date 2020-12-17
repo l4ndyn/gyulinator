@@ -185,8 +185,20 @@ bot.on('message', message => {
 		}
 
 		const myClass = args[0];
+		if (!['logfunk', 'data', 'java', 'num', 'linux', 'stat', 'english'].includes(myClass)) {
+			message.channel.send('Te buta! Ilyen tantargy nem is letezik! \nTargyak: logfunk, data, java, num, linux, stat, english');
+			return;
+		}
+
 		let group = args[1];
-		if (group !== undefined) group = group.replace('/', '_');
+		if (group !== undefined) {
+			const check = group.match(/52[1-4](\/[1-2])?/g);
+			if (check == null || check[0].length < group.length) {
+				message.channel.send('Te buta! Ilyen csoport nem is letezik! Biztos ide jarsz?');
+				return;
+			}
+			group = group.replace('/', '_');
+		}
 
 		const classInf = classes[myClass];
 
