@@ -46,9 +46,16 @@ const classes = require('./classes.json');
 bot.on('message', message => {
 	const PREFIX = '!';
 
-	if (!message.content.startsWith(PREFIX) || message.author.bot) return;
+	let reverse = false;
+	let input = message.content;
+	if (input.endsWith(PREFIX)) {
+		input = input.split('').reverse().join('');
+		reverse = true;
+	}
 
-	const args = message.content.slice(PREFIX.length).trim().split(' ');
+	if (!input.startsWith(PREFIX) || message.author.bot) return;
+
+	const args = input.slice(PREFIX.length).trim().split(' ');
 	const command = args.shift().toLowerCase();
 
 	if (command === 'help') {
@@ -70,7 +77,10 @@ bot.on('message', message => {
 		if (Math.floor(diffInDays / 7) % 2 === 1) {
 			msg = 'Paros';
 		}
-		message.channel.send(`**[${msg}]** het van. :)`);
+
+		let resp = `**[${msg}]** het van. :)`;
+		if (reverse) resp = resp.split('').reverse().join('');
+		message.channel.send(resp);
 	}
 	else if (command === 'actest') {
 		if (Math.random() < 0.5) {
@@ -258,6 +268,7 @@ bot.on('message', message => {
 			sentinel_watch();
 		}
 	}
+
 	if (command !== 'punishment') {
 		punishment = false;
 	}
